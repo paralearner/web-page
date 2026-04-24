@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card Countdown</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #f7333a 0%, #3a63ec 100%);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+      }
+      .card {
+        background: linear-gradient(135deg, #f7333a 0%, #3a63ec 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 350px;
+      }
+      .birthday-img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+      }
+      .timer {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img src="images/cr7.jpg" alt="Birthday" class="birthday-img" />
+
+      <h1 id="displayName">Happy Birthday!</h1>
+      <h2>CR 7</h2>
+
+      <div class="timer">
+        <div><span id="days">00</span><br />Days</div>
+        <div><span id="hours">00</span><br />Hrs</div>
+        <div><span id="mins">00</span><br />Min</div>
+        <div><span id="secs">00</span><br />Sec</div>
+      </div>
+
+      <p>Countdown to the Big Day!</p>
+    </div>
+
+    <script>
+      const birthdayDate = new Date("5 february, 2027 00:00:00").getTime();
+
+      const countdown = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = birthdayDate - now;
+
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d;
+        document.getElementById("hours").innerText = h;
+        document.getElementById("mins").innerText = m;
+        document.getElementById("secs").innerText = s;
+
+        if (distance < 0) {
+          clearInterval(countdown);
+          document.querySelector(".timer").innerHTML = "SUIIIIIII!";
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
